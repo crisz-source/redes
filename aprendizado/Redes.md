@@ -1,7 +1,8 @@
 # Aprendizado em REDES DE COMPUTADORES 
-## Camadas Modelo OSI
 
-## Camada 1 – a Camada física. 
+
+
+## Camadas Modelo OSI;  Camada 1 – a Camada física. 
 - A camada física envia e recebe fluxos de bits brutos em uma mídia física.
 
 
