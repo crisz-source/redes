@@ -89,3 +89,58 @@
 
 - Com tudo isso feito, basta apenas reiniciar o DHCP, na cisco basta apenas colocar static e depois para dhcp novamente para pegar novos iP e realizei um novo teste de conexão para ter certeza se esta tudo correto, e aqui esta:
 ![alt text](./img-vlans/image-18.png)
+
+
+# Configurando um servidor e adicionando politicas de acesso
+
+- Aqui neste tópico, adicionei um servidor que vai ter uma politica de acesso
+![alt text](./img-vlans/img0.png)
+
+- Para realizar a configuração corretamente, em cada switch na rede criei uma terceira vlan e uma terceira subinterface, modifiquei para que o servidor tenha acesso ao a porta Fa 0/4
+* vlan30
+![alt text](./img-vlans/img2.png)
+![alt text](./img-vlans/img1.png)
+
+- o servidor ficou com essas configurações estáticas
+![alt text](./img-vlans/img3.png)
+
+- Com isso criado, realizei teste na cisco em real time para verificar os protocolos que estão sendo trabalhado. 
+![alt text](./img-vlans/img4.png)
+- Note que é o protocolo TCP que esta trabalhando e é o responsável por fazer o transporte de dados seguros por todo o tráfego de rede.
+
+- TCP -> Este protocolo é o principal protocolo da camada de transporte, ele permite uma comunicação confiável e segura entre dois dispositvos. Ou seja, no momento que acessar o servidor configurado no ip 172.16.4.2, o TCP vai encaminhar uma mensagem para o servidor de "sincornização" e vai respoonder com uma mensagem de confirmação na hora de sincronizar, e o pc que esta tentando conectar ao servidor tambem manda uma mensagem de confirmação que será sincronizado e por fim, realizar a conexão através de uma porta, o famoso aperto de mão triplo. Ou seja, durante todo esse processo o protocolo garante que não perca nenhum tipo de dado durante o caminho de "sincronização" . Depois dessas confirmação de aperto de mão triplo, entra o procotocolo HTTP de acordo no print tirado acima, que basicamente é uma resposta do servidor para o pc que esta conectando ao servidor. Isso tudo permite realizar a configuração de politica de acesso.
+- UDP ->  Esse protocolo é mais usado para a velocidade de conexão entre os dispositivos, mas pode ter algumas perdas de informação utilizando UDP
+
+## Lista de acesso
+- aqui, no pc Gerencia, atribui um ip estático: 
+![alt text](./img-vlans/img5.png)
+
+- fiz o mesmo com o pc da coordenação.
+- Para que funcione corretamente, foi necessário realizar as seguintes configurações no roteador:
+![alt text](./img-vlans/img6.png)
+
+```bash 
+Router(config)#ip dhcp excluded-address 172.16.2.2 # EXLUINDO OS ENDEREÇOS IP
+Router(config)#ip dhcp excluded-address 172.16.2.3 # EXLUINDO OS ENDEREÇOS IP 
+Router(config)#ip access-list extended gerencial # LISTA DE EXENTED, ELE COMPARA OS ENDEREÇO IP DE ORIGEM E DESTINO, o standart faz a comparação apenas do DESTINO e adicionado o nome gerencial
+Router(config-ext-nacl)#permit tcp 172.16.2.2 0.0.0.0 172.16.4.2 0.0.0.0 # PERMITINDO O ACESSO TCP DESSE IP
+Router(config-ext-nacl)#permit tcp 172.16.2.3 0.0.0.0 172.16.4.2 0.0.0.0 # PERMITINDO O ACESSO TCP DESSE IP
+Router(config-ext-nacl)#deny tcp 172.16.2.6 0.0.255.255 172.16.4.2 0.0.0.0 # NEGANDO  QUALQUER ACESSO QUE NAO ESTEJA NA LISTA 
+Router(config-ext-nacl)#permit ip any any 
+Router(config-ext-nacl)#exit
+```
+- permit tcp 172.16.2.2 0.0.0.0 172.16.4.2 0.0.0.0 -> Significa que o endereço ip tem que ser exatemente igual do que esta sendo solicitado, se tiver permit tcp 172.16.2.2 0.0.255.255, qualquer máquina vai ter acesso pois todas as máquinas tem o mesmo "digito" os mesmos dois primeiros octetos iguais.
+
+- Agora, configurei o roteador para realizar a vinculação das subinterfaces na lista de gerencial, na lista de acesso
+![alt text](./img-vlans/img7.png)
+
+- Com isso tudo isso feito, agora, apenas os pc da gerencia e coordenação consegue acessar o servidor. O restante esta bloqueado
+- pc pesquisador:
+![alt text](./img-vlans/img8.png)
+
+- pc gerencia:
+![alt text](./img-vlans/img9.png)
+
+## Conectando a uma rede externa
+- Criei um roteador que vai ser uma simulação de provedor de serviço a internet. E fiz uma conexão com o cabo .... entre o roteador de que vai ser o provedor de interet e o roteador dhcp
+
