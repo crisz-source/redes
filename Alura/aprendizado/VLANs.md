@@ -142,5 +142,6 @@ Router(config-ext-nacl)#exit
 ![alt text](./img-vlans/img9.png)
 
 ## Conectando a uma rede externa
-- Criei um roteador que vai ser uma simulação de provedor de serviço a internet. E fiz uma conexão com o cabo .... entre o roteador de que vai ser o provedor de interet e o roteador dhcp
+- Criei um roteador que vai ser uma simulação de provedor de serviço a internet. E fiz uma conexão com o cabo entre o roteador de que vai ser o provedor de interet (rede externa) e o roteador dhcp (rede interna)
+- Na cisco, tive que adicionar uma porta para realizar um conversor de sinal  WIC-1T e utilizar o conector Serial DCE que por sua vez é um cabo
 
