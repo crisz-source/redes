@@ -144,4 +144,22 @@ Router(config-ext-nacl)#exit
 ## Conectando a uma rede externa
 - Criei um roteador que vai ser uma simulação de provedor de serviço a internet. E fiz uma conexão com o cabo entre o roteador de que vai ser o provedor de interet (rede externa) e o roteador dhcp (rede interna)
 - Na cisco, tive que adicionar uma porta para realizar um conversor de sinal  WIC-1T e utilizar o conector Serial DCE que por sua vez é um cabo
+![alt text](./img-vlans/imgg10.png)
 
+## Configuração do provedor de seviços
+- roteador
+![alt text](./img-vlans/imgg11.png)
+roteador
+
+
+- provedor de serviço: 
+![alt text](./img-vlans/imgg12.png)
+
+- NAT -> Basicamente este procotolo faz uma tradução de um ip privado para um ip publico
+- Utilizei o NAT para que todos os positivos tenham apenas um unico IP e fiz essa configuração:
+![alt text](./img-vlans/imgg13.png)
+
+- Nessa configuração, configurei as informando quais serão internas e externas, onde "inside é interno e "outside" externo. Configurei também as listas de NAT
+
+- Aqui foi o teste de conexão para verificar se o NAT está funcionando corretamente.
+![alt text](./img-vlans/imgg14g.png)
