@@ -163,3 +163,6 @@ roteador
 
 - Aqui foi o teste de conexão para verificar se o NAT está funcionando corretamente.
 ![alt text](./img-vlans/imgg14g.png)
+
+## Ambiente de simulação de uma rede interna utilizando vlans, dhcp, protocolos TCP, NAT
+![alt text](./img-vlans/imgg15.png)
