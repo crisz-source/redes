@@ -93,3 +93,11 @@ B       190.1.1.0 [20/0] via 160.1.1.2, 00:00:00
 ```
 
 - B = BGP
+
+- Divulgando as redes pelo BGP no roteador ISP1 - B
+![alt text](image-12.png)
+
+- Verificando se esta chegando as redes no roteador ISP2 - C
+![alt text](image-13.png)
+
+
