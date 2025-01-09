@@ -51,6 +51,45 @@ Por fim, no Server ISP 2 B, clicamos na aba Desktop e selecionamos a opção IP 
 Verificamos a tabela de roteamento dos roteadores configurados na rede, entrando na aba CLI no modo enable e usando o comando show ip route. Observamos que, conforme esperado, os roteadores só possuíam informações das redes diretamente conectadas em suas interfaces
 ```
 
-- Configurando o OSPEF
+- Configurando o OSPEF no roteador ISP 2 - C
 ![alt text](image-7.png)
 
+Configurando o OSPEF no roteador ISP 2 - D
+![alt text](image-8.png)
+
+- O OSPF (Open Shortest Path First) é um protocolo de roteamento que pode se adaptar facilmente ao crescimento da rede, oferecendo escalabilidade, convergência rápida e adaptabilidade às mudanças na topologia.
+
+
+
+# Roteamento Externo
+
+- BGP: Border Gateway Protocol, este protocolo vai atuar no encaminhamente das inforamções em redes diferentes. O protocolo OSPEF como ele é utilizado mais em redes pequenas, para que essa rede consiga fazer uma comunicação com redes externas é necessário configurar os roteadores utiliznado o protocolo BGP.
+
+- Configurando o roteador ISP1 - B
+![alt text](image-9.png)
+
+- Repetindo o processo no C
+![alt text](image-10.png)
+
+
+- Verificando se deu tudo certo utilizando o BGP no roteador ISP1 - B
+![alt text](image-11.png)
+
+- Retorno se deu tudo certo: 
+```bash
+     150.1.0.0/30 is subnetted, 3 subnets
+R       150.1.1.0 [120/1] via 150.1.1.5, 00:00:21, FastEthernet0/0
+C       150.1.1.4 is directly connected, FastEthernet0/0
+C       150.1.1.8 is directly connected, FastEthernet0/1
+     160.1.0.0/30 is subnetted, 1 subnets
+C       160.1.1.0 is directly connected, Serial0/1/0
+     170.1.0.0/30 is subnetted, 1 subnets
+B       170.1.1.0 [20/0] via 160.1.1.2, 00:00:00
+     180.1.0.0/30 is subnetted, 1 subnets
+B       180.1.1.0 [20/0] via 160.1.1.2, 00:00:00
+     190.1.0.0/30 is subnetted, 1 subnets
+B       190.1.1.0 [20/0] via 160.1.1.2, 00:00:00
+
+```
+
+- B = BGP
