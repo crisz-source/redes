@@ -101,3 +101,21 @@ B       190.1.1.0 [20/0] via 160.1.1.2, 00:00:00
 ![alt text](image-13.png)
 
 
+# DNS 
+- No roteador principal (Routeadior-DHCP)  configurei ele para que os pacotes seja enviados das maquinas para os servidores de provedores de serviços
+![alt text](image-14.png)
+
+- Realizando um teste de conexão com os servidores web:
+![alt text](image-15.png)
+
+- Configurando um servidor DNS
+![alt text](image-16.png)
+
+- Configurando as vlans para enxergar o servidor DNS e distrubir para as máquinas. (Vai ser necessário nos Pcs e fazer uma nova requisição no dhcp)
+ ![alt text](image-17.png)
+![alt text](image-18.png)
+
+- Testando o DNS
+![alt text](image-19.png)
+
+# IPV6
